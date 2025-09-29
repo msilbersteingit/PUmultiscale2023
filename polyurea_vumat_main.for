@@ -431,17 +431,14 @@ C       pass state variables to Abaqus *********************************
 
 C       pass sigmaNew to Abaqus **************************************** 
 
-C       scorotNew = RT*sigmaNew*R
-        scorotNew = matmul(transpose(R),matmul(sigmaNew,R))
+C       store components of sigmaNew in stressNew
+        stressNew(km,1) = sigmaNew(1,1)
+        stressNew(km,2) = sigmaNew(2,2)
+        stressNew(km,3) = sigmaNew(3,3)
 
-C       store components of SCOROT in stressNew
-        stressNew(km,1) = scorotNew(1,1)
-        stressNew(km,2) = scorotNew(2,2)
-        stressNew(km,3) = scorotNew(3,3)
-
-        stressNew(km,4) = scorotNew(1,2)
-        stressNew(km,5) = scorotNew(2,3)
-        stressNew(km,6) = scorotNew(3,1)
+        stressNew(km,4) = sigmaNew(1,2)
+        stressNew(km,5) = sigmaNew(2,3)
+        stressNew(km,6) = sigmaNew(3,1)
 
   100 continue
 
